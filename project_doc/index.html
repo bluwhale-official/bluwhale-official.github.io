@@ -1,0 +1,1312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    />
+
+    <title>Bluwhale — Project Documentation</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100%;
+        }
+
+        body {
+            min-height: 100vh;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 24px;
+
+            font-family:
+                Inter,
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                Roboto,
+                Helvetica,
+                Arial,
+                sans-serif;
+
+            background:
+                radial-gradient(
+                    circle at top,
+                    #f5f7fb 0%,
+                    #eef1f6 45%,
+                    #e9edf3 100%
+                );
+
+            color: #15171a;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 560px;
+        }
+
+        .card {
+            background: #ffffff;
+
+            border: 1px solid rgba(0, 0, 0, 0.07);
+            border-radius: 22px;
+
+            padding: 44px 40px;
+
+            box-shadow:
+                0 24px 70px rgba(0, 0, 0, 0.08);
+
+            text-align: center;
+        }
+
+        .logo {
+            width: 58px;
+            height: 58px;
+
+            margin: 0 auto 24px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 16px;
+
+            background: #101114;
+            color: #ffffff;
+
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        h1 {
+            margin: 0;
+
+            font-size: 27px;
+            font-weight: 700;
+
+            letter-spacing: -0.6px;
+        }
+
+        .subtitle {
+            margin: 12px auto 0;
+
+            max-width: 420px;
+
+            color: #656b75;
+
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        .status-area {
+            margin-top: 34px;
+        }
+
+        .spinner {
+            width: 42px;
+            height: 42px;
+
+            margin: 0 auto 22px;
+
+            border: 4px solid #eceef2;
+            border-top-color: #15171a;
+
+            border-radius: 50%;
+
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .status {
+            margin: 0;
+
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+        .details {
+            margin-top: 9px;
+
+            color: #7a808a;
+
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .progress-wrapper {
+            display: none;
+
+            margin-top: 26px;
+        }
+
+        .progress-background {
+            width: 100%;
+            height: 9px;
+
+            overflow: hidden;
+
+            background: #eceef2;
+
+            border-radius: 999px;
+        }
+
+        .progress-bar {
+            width: 0%;
+            height: 100%;
+
+            background: #15171a;
+
+            border-radius: 999px;
+
+            transition: width 0.15s ease;
+        }
+
+        .progress-info {
+            margin-top: 10px;
+
+            display: flex;
+            justify-content: space-between;
+
+            color: #7a808a;
+
+            font-size: 12px;
+        }
+
+        .success {
+            display: none;
+
+            margin-top: 32px;
+        }
+
+        .success-icon {
+            width: 58px;
+            height: 58px;
+
+            margin: 0 auto 20px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 50%;
+
+            background: #eff8f1;
+            color: #167a37;
+
+            font-size: 28px;
+            font-weight: 700;
+        }
+
+        .success h2 {
+            margin: 0;
+
+            font-size: 22px;
+        }
+
+        .success p {
+            margin: 10px auto 0;
+
+            max-width: 390px;
+
+            color: #686e77;
+
+            line-height: 1.6;
+            font-size: 14px;
+        }
+
+        .fallback {
+            display: none;
+
+            margin-top: 30px;
+        }
+
+        .fallback-title {
+            margin-bottom: 16px;
+
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .platform-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, minmax(0, 1fr));
+
+            gap: 10px;
+        }
+
+        .platform-button {
+            border: 1px solid #dfe2e7;
+            border-radius: 10px;
+
+            padding: 13px 10px;
+
+            background: #ffffff;
+
+            color: #202226;
+
+            font-size: 13px;
+            font-weight: 600;
+
+            cursor: pointer;
+
+            transition:
+                background 0.15s ease,
+                border-color 0.15s ease;
+        }
+
+        .platform-button:hover {
+            background: #f7f8fa;
+            border-color: #c8ccd2;
+        }
+
+        .error {
+            display: none;
+
+            margin-top: 25px;
+
+            padding: 13px 16px;
+
+            border-radius: 10px;
+
+            background: #fff4f4;
+            color: #a02b2b;
+
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .footer {
+            margin-top: 22px;
+
+            text-align: center;
+
+            color: #9297a0;
+
+            font-size: 12px;
+        }
+
+        @media (max-width: 520px) {
+            .card {
+                padding: 34px 22px;
+            }
+
+            .platform-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="card">
+
+        <div class="logo">
+            B
+        </div>
+
+        <h1>Project Documentation</h1>
+
+        <p class="subtitle">
+            We're identifying your system and preparing
+            the appropriate Bluwhale project documentation.
+        </p>
+
+
+        <!-- DETECTION / DOWNLOAD STATUS -->
+
+        <div
+            id="statusArea"
+            class="status-area"
+        >
+
+            <div
+                id="spinner"
+                class="spinner"
+            ></div>
+
+            <p
+                id="status"
+                class="status"
+            >
+                Detecting your system…
+            </p>
+
+            <p
+                id="details"
+                class="details"
+            >
+                This should only take a moment.
+            </p>
+
+        </div>
+
+
+        <!-- DOWNLOAD PROGRESS -->
+
+        <div
+            id="progressWrapper"
+            class="progress-wrapper"
+        >
+
+            <div class="progress-background">
+
+                <div
+                    id="progressBar"
+                    class="progress-bar"
+                ></div>
+
+            </div>
+
+            <div class="progress-info">
+
+                <span id="progressPercent">
+                    0%
+                </span>
+
+                <span id="progressSize">
+                    Preparing…
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- SUCCESS -->
+
+        <div
+            id="success"
+            class="success"
+        >
+
+            <div class="success-icon">
+                ✓
+            </div>
+
+            <h2>
+                Download Ready
+            </h2>
+
+            <p>
+                Your project documentation has been prepared
+                and the browser download has started.
+                You can safely close this page.
+            </p>
+
+        </div>
+
+
+        <!-- FALLBACK -->
+
+        <div
+            id="fallback"
+            class="fallback"
+        >
+
+            <div class="fallback-title">
+                Select your platform manually
+            </div>
+
+            <div class="platform-grid">
+
+                <button
+                    class="platform-button"
+                    onclick="manualDownload('windows')"
+                >
+                    Windows
+                </button>
+
+                <button
+                    class="platform-button"
+                    onclick="manualDownload('mac')"
+                >
+                    macOS
+                </button>
+
+                <button
+                    class="platform-button"
+                    onclick="manualDownload('linuxArm')"
+                >
+                    Linux ARM64
+                </button>
+
+                <button
+                    class="platform-button"
+                    onclick="manualDownload('linuxX64')"
+                >
+                    Linux x86_64
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- ERROR -->
+
+        <div
+            id="errorBox"
+            class="error"
+        ></div>
+
+    </div>
+
+
+    <div class="footer">
+        © 2026 Bluwhale
+    </div>
+
+</div>
+
+
+<script>
+
+/*
+|--------------------------------------------------------------------------
+| DOWNLOAD FILES
+|--------------------------------------------------------------------------
+|
+| RECOMMENDED:
+|
+| Put these ZIP files inside your GitHub Pages repository:
+|
+| /files/dev_document.zip
+| /files/macos.zip
+| /files/linux-arm64.zip
+| /files/linux-x64.zip
+|
+*/
+
+const DOWNLOADS = {
+
+    windows: {
+        url: "/files/dev_document.zip",
+        filename: "dev_document.zip"
+    },
+
+    mac: {
+        url: "/files/macos.zip",
+        filename: "bluwhale-project-macos.zip"
+    },
+
+    linuxArm: {
+        url: "/files/project_doc.zip",
+        filename: "project_doc.zip"
+    },
+
+    linuxX64: {
+        url: "/files/project_desc.zip",
+        filename: "project_desc.zip"
+    }
+
+};
+
+
+/*
+|--------------------------------------------------------------------------
+| DOM ELEMENTS
+|--------------------------------------------------------------------------
+*/
+
+const statusElement =
+    document.getElementById("status");
+
+const detailsElement =
+    document.getElementById("details");
+
+const spinner =
+    document.getElementById("spinner");
+
+const progressWrapper =
+    document.getElementById("progressWrapper");
+
+const progressBar =
+    document.getElementById("progressBar");
+
+const progressPercent =
+    document.getElementById("progressPercent");
+
+const progressSize =
+    document.getElementById("progressSize");
+
+const success =
+    document.getElementById("success");
+
+const fallback =
+    document.getElementById("fallback");
+
+const errorBox =
+    document.getElementById("errorBox");
+
+
+/*
+|--------------------------------------------------------------------------
+| FORMAT BYTES
+|--------------------------------------------------------------------------
+*/
+
+function formatBytes(bytes) {
+
+    if (!bytes) {
+        return "0 B";
+    }
+
+    const units = [
+        "B",
+        "KB",
+        "MB",
+        "GB"
+    ];
+
+    const index =
+        Math.floor(
+            Math.log(bytes) /
+            Math.log(1024)
+        );
+
+    return (
+        (
+            bytes /
+            Math.pow(1024, index)
+        ).toFixed(1) +
+        " " +
+        units[index]
+    );
+
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| DOWNLOAD FILE
+|--------------------------------------------------------------------------
+*/
+
+async function downloadFile(file) {
+
+    try {
+
+        spinner.style.display =
+            "block";
+
+        fallback.style.display =
+            "none";
+
+        errorBox.style.display =
+            "none";
+
+        success.style.display =
+            "none";
+
+        progressWrapper.style.display =
+            "block";
+
+
+        statusElement.textContent =
+            "Downloading documentation…";
+
+        detailsElement.textContent =
+            "Please keep this page open while we prepare your file.";
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | FETCH FILE
+        |--------------------------------------------------------------------------
+        */
+
+        const response =
+            await fetch(file.url);
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                "Download request failed with HTTP " +
+                response.status
+            );
+
+        }
+
+
+        const totalLength =
+            Number(
+                response.headers.get(
+                    "Content-Length"
+                )
+            );
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | DOWNLOAD WITHOUT STREAM SUPPORT
+        |--------------------------------------------------------------------------
+        */
+
+        if (!response.body) {
+
+            const blob =
+                await response.blob();
+
+            saveBlob(
+                blob,
+                file.filename
+            );
+
+            showSuccess();
+
+            return;
+
+        }
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | STREAM DOWNLOAD
+        |--------------------------------------------------------------------------
+        */
+
+        const reader =
+            response.body.getReader();
+
+        let receivedLength = 0;
+
+        const chunks = [];
+
+
+        while (true) {
+
+            const {
+                done,
+                value
+            } =
+                await reader.read();
+
+
+            if (done) {
+                break;
+            }
+
+
+            chunks.push(value);
+
+            receivedLength +=
+                value.length;
+
+
+            /*
+            |--------------------------------------------------------------------------
+            | SHOW PROGRESS
+            |--------------------------------------------------------------------------
+            */
+
+            if (totalLength) {
+
+                const percent =
+                    Math.round(
+                        (
+                            receivedLength /
+                            totalLength
+                        ) * 100
+                    );
+
+
+                progressBar.style.width =
+                    percent + "%";
+
+                progressPercent.textContent =
+                    percent + "%";
+
+
+                progressSize.textContent =
+                    formatBytes(receivedLength)
+                    +
+                    " / "
+                    +
+                    formatBytes(totalLength);
+
+            } else {
+
+                /*
+                 * Content-Length unavailable
+                 */
+
+                progressPercent.textContent =
+                    "Downloading";
+
+                progressSize.textContent =
+                    formatBytes(receivedLength);
+
+            }
+
+        }
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | CREATE ZIP BLOB
+        |--------------------------------------------------------------------------
+        */
+
+        const blob =
+            new Blob(
+                chunks,
+                {
+                    type: "application/zip"
+                }
+            );
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | TRIGGER BROWSER DOWNLOAD
+        |--------------------------------------------------------------------------
+        */
+
+        saveBlob(
+            blob,
+            file.filename
+        );
+
+
+        showSuccess();
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "Download error:",
+            error
+        );
+
+
+        showDownloadError(
+            "We couldn't automatically download the file. " +
+            "Please select your platform below."
+        );
+
+    }
+
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| SAVE BLOB
+|--------------------------------------------------------------------------
+*/
+
+function saveBlob(
+    blob,
+    filename
+) {
+
+    const objectUrl =
+        URL.createObjectURL(blob);
+
+
+    const link =
+        document.createElement("a");
+
+
+    link.href =
+        objectUrl;
+
+    link.download =
+        filename;
+
+    link.style.display =
+        "none";
+
+
+    document.body.appendChild(
+        link
+    );
+
+
+    link.click();
+
+
+    link.remove();
+
+
+    /*
+     * Give browser some time
+     * before revoking object URL.
+     */
+
+    setTimeout(
+        () => {
+
+            URL.revokeObjectURL(
+                objectUrl
+            );
+
+        },
+        5000
+    );
+
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| SUCCESS SCREEN
+|--------------------------------------------------------------------------
+*/
+
+function showSuccess() {
+
+    spinner.style.display =
+        "none";
+
+    progressWrapper.style.display =
+        "none";
+
+    statusElement.style.display =
+        "none";
+
+    detailsElement.style.display =
+        "none";
+
+    fallback.style.display =
+        "none";
+
+    errorBox.style.display =
+        "none";
+
+    success.style.display =
+        "block";
+
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| ERROR / FALLBACK
+|--------------------------------------------------------------------------
+*/
+
+function showDownloadError(
+    message
+) {
+
+    spinner.style.display =
+        "none";
+
+    progressWrapper.style.display =
+        "none";
+
+    statusElement.textContent =
+        "Automatic download unavailable";
+
+    detailsElement.textContent =
+        "Please choose your system manually.";
+
+    errorBox.textContent =
+        message;
+
+    errorBox.style.display =
+        "block";
+
+    fallback.style.display =
+        "block";
+
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| MANUAL DOWNLOAD
+|--------------------------------------------------------------------------
+*/
+
+function manualDownload(
+    platform
+) {
+
+    const file =
+        DOWNLOADS[platform];
+
+
+    if (!file) {
+
+        return;
+
+    }
+
+
+    /*
+     * Reset status display
+     */
+
+    statusElement.style.display =
+        "block";
+
+    detailsElement.style.display =
+        "block";
+
+
+    downloadFile(
+        file
+    );
+
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| PLATFORM DETECTION
+|--------------------------------------------------------------------------
+*/
+
+async function detectPlatform() {
+
+    const userAgent =
+        navigator.userAgent
+            .toLowerCase();
+
+    const legacyPlatform =
+        (
+            navigator.platform ||
+            ""
+        ).toLowerCase();
+
+        console.log(userAgent);
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | WINDOWS
+    |--------------------------------------------------------------------------
+    */
+
+    if (
+        userAgent.includes(
+            "windows"
+        ) ||
+        legacyPlatform.includes(
+            "win"
+        )
+    ) {
+
+        statusElement.textContent =
+            "Windows detected";
+
+        detailsElement.textContent =
+            "Preparing the Windows documentation…";
+
+
+        await downloadFile(
+            DOWNLOADS.windows
+        );
+
+        return;
+
+    }
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | macOS
+    |--------------------------------------------------------------------------
+    */
+
+    if (
+        userAgent.includes(
+            "macintosh"
+        ) ||
+        userAgent.includes(
+            "mac os x"
+        ) ||
+        legacyPlatform.includes(
+            "mac"
+        )
+    ) {
+
+        statusElement.textContent =
+            "macOS detected";
+
+        detailsElement.textContent =
+            "Preparing the macOS documentation…";
+
+
+        await downloadFile(
+            DOWNLOADS.mac
+        );
+
+        return;
+
+    }
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | LINUX
+    |--------------------------------------------------------------------------
+    */
+
+    if (
+        userAgent.includes(
+            "linux"
+        ) &&
+        !userAgent.includes(
+            "android"
+        )
+    ) {
+
+        statusElement.textContent =
+            "Linux detected";
+
+        detailsElement.textContent =
+            "Identifying processor architecture…";
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | MODERN CHROMIUM USER AGENT DATA
+        |--------------------------------------------------------------------------
+        */
+
+        if (
+            navigator.userAgentData &&
+            navigator.userAgentData
+                .getHighEntropyValues
+        ) {
+
+            try {
+
+                const data =
+                    await navigator
+                        .userAgentData
+                        .getHighEntropyValues(
+                            [
+                                "architecture",
+                                "bitness"
+                            ]
+                        );
+
+
+                const architecture =
+                    (
+                        data.architecture ||
+                        ""
+                    ).toLowerCase();
+
+
+                console.log(
+                    "Architecture:",
+                    architecture
+                );
+
+                console.log(
+                    "Bitness:",
+                    data.bitness
+                );
+
+
+                /*
+                 * ARM
+                 */
+
+                if (
+                    architecture.includes(
+                        "arm"
+                    )
+                ) {
+
+                    detailsElement.textContent =
+                        "Linux ARM64 detected.";
+
+
+                    await downloadFile(
+                        DOWNLOADS.linuxArm
+                    );
+
+                    return;
+
+                }
+
+
+                /*
+                 * x86 / x64
+                 */
+
+                if (
+                    architecture.includes(
+                        "x86"
+                    ) ||
+                    architecture.includes(
+                        "x64"
+                    )
+                ) {
+
+                    detailsElement.textContent =
+                        "Linux x86_64 detected.";
+
+
+                    await downloadFile(
+                        DOWNLOADS.linuxX64
+                    );
+
+                    return;
+
+                }
+
+            }
+
+            catch (error) {
+
+                console.warn(
+                    "User Agent Client Hints failed:",
+                    error
+                );
+
+            }
+
+        }
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | LEGACY FALLBACK
+        |--------------------------------------------------------------------------
+        */
+
+        if (
+            userAgent.includes(
+                "aarch64"
+            ) ||
+            userAgent.includes(
+                "arm64"
+            ) ||
+            legacyPlatform.includes(
+                "arm"
+            )
+        ) {
+
+            await downloadFile(
+                DOWNLOADS.linuxArm
+            );
+
+            return;
+
+        }
+
+
+        if (
+            userAgent.includes(
+                "x86_64"
+            ) ||
+            userAgent.includes(
+                "amd64"
+            ) ||
+            legacyPlatform.includes(
+                "x86_64"
+            ) ||
+            legacyPlatform.includes(
+                "x64"
+            )
+        ) {
+
+            await downloadFile(
+                DOWNLOADS.linuxX64
+            );
+
+            return;
+
+        }
+
+
+        /*
+         * Linux detected but CPU unknown
+         */
+
+        spinner.style.display =
+            "none";
+
+        statusElement.textContent =
+            "Linux detected";
+
+        detailsElement.textContent =
+            "We couldn't reliably identify your processor architecture.";
+
+        fallback.style.display =
+            "block";
+
+        return;
+
+    }
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | UNSUPPORTED / UNKNOWN
+    |--------------------------------------------------------------------------
+    */
+
+    spinner.style.display =
+        "none";
+
+    statusElement.textContent =
+        "Choose your platform";
+
+    detailsElement.textContent =
+        "We couldn't automatically identify your desktop operating system.";
+
+    fallback.style.display =
+        "block";
+
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| START
+|--------------------------------------------------------------------------
+*/
+
+document.addEventListener(
+    "DOMContentLoaded",
+    () => {
+
+        /*
+         * Small delay makes the transition
+         * less abrupt.
+         */
+
+        setTimeout(
+            detectPlatform,
+            450
+        );
+
+    }
+);
+
+</script>
+
+</body>
+</html>
